@@ -54,8 +54,8 @@ public class UserInfoController {
         return userService.insertUserInfo(user);
     }
 
-    @PutMapping("/user-infos")
-    public int updateUserInfo(@RequestBody UserInfoVO user) {
+    @PutMapping("/user-infos/{uiNum}")
+    public int updateUserInfo(@RequestBody UserInfoVO user, @PathVariable int uiNum) {
         return userService.updateUserInfo(user);
     }
 

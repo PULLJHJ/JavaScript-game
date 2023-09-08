@@ -25,18 +25,35 @@
         </tbody>
 
     </table>
-    <button onclick="location.href='/tmpl/user-info/update'">수정</button>
-    <button onclick="member()" id="btn-delete">삭제</button>
+    <button onclick="goUpdatePage()"  id="btn-update">수정</button>
+    <button onclick="deleteUserInfo()" id="btn-delete">삭제</button>
     <script>
+        const url = new URL(location.href);
+        const params = url.searchParams;
+        const uiNum = params.get('uiNum');
+
+        function goUpdatePage() {
+            location.href=`/tmpl/user-info/update?uiNum=${uiNum}`;
+        }
+
+        async function deleteUserInfo() {
+            const res = await fetch(`/user-infos/${uiNum}`, {
+                method: 'DELETE'
+            });
+            const result = await res.json();
+
+            if(result === 1) {
+                alert('삭제 완료');
+                location.href='/tmpl/user-info/list';
+            } else {
+                alert('삭제 실패');
+            }
+        }
+
         window.addEventListener('load', async function () {
-            const url = new URL(location.href);
-            const params = url.searchParams;
-            const uiNum = params.get('uiNum');
-
-
-            const res = await fetch(`/user-infos/${uiNum}`);
-            
+            const res = await fetch(`/user-infos/${uiNum}`);            
             const user = await res.json();
+
             console.log(user);
             let html = '';
             

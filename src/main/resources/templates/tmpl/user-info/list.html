@@ -9,7 +9,7 @@
     <h3></h3>리스트</h3>
     <form>
         <input type="text" name="uiName" placeholder="이름" th:value="${param.uiName}">
-        <button onclick="location.href='/tmpl/user-info/insert'">검색</button>
+        <button>검색</button> 
     </form>
     <table border="1">
         <tr>
@@ -21,7 +21,7 @@
         <tbody id="UserBody">
         </tbody>
     </table>
-    <button onclick="location.href='/tmpl/user-info/insert'">유저 추가 하러 가기</button>
+    <button onclick="location.href='/tmpl/user-info/join'">유저 추가 하러 가기</button>
     <script>
         window.addEventListener('load', async function(){
             const res = await fetch('/user-infos');
@@ -30,7 +30,7 @@
             for(const user of users){
                 html += '<tr>';
                 html += `<td>${user.uiNum}</td>`;
-                html += `<td><a href="/tmpl/user-info/member.html?uiNum=${user.uiNum}">${user.uiName}</a></td>`;
+                html += `<td><a href="/tmpl/user-info/member?uiNum=${user.uiNum}">${user.uiName}</a></td>`;
                 html += `<td>${user.uiId}</td>`;
                 html += `<td>${user.credat}</td>`;
               //  html += `<td>${user.uiBirth}</td>`;

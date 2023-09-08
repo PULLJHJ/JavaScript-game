@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    이름 : <input type="text" id="uiName" placeholder="이름" /> <br>
+    아이디 : <input type="text" id="uiId" placeholder="4자이상" /> <br>
+    비밀번호 : <input type="password" id="uiPwd" placeholder="특수기호 !@#$ 중 1개이상" > <br>
+    이메일 : <input type="text" id="uiEmail" placeholder="메일전송이 가능한 주소" > <br>
+    휴대번호: <input type="text" id="uiMobile" placeholder="' - ' 없이 입력" > <br />
+    생일 : <input type="text" id="uiBirth" placeholder="ex)19970420" > <br />
+
+    <button onclick="insertUser()">회원 등록</button>
+
+    <script>
+      async function insertUser() {
+        const data = {
+          uiName: document.querySelector('#uiName').value,
+          uiId: document.querySelector('#uiId').value,
+          uiPwd: document.querySelector('#uiPwd').value,
+          uiEmail: document.querySelector('#uiEmail').value,
+          uiMobile: document.querySelector('#uiMobile').value,
+          uiBirth: document.querySelector('#uiBirth').value
+        }
+
+        const json = JSON.stringify(data);
+        console.log(json);
+
+        const res = await fetch("http://localhost/user-infos", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+          body: json,
+        });
+
+        const result = await res.text();
+        if (result == 1) {
+          alert("등록되었습니다");
+          location.href = "/tmpl/user-info";
+        } else {
+          alert("등록에 실패했습니다.");
+        }
+      }
+    </script>
+  </body>
+</html>

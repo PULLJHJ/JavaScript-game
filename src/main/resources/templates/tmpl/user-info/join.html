@@ -16,7 +16,7 @@
        비밀번호 : <input type="password" id="uiPwd" placeholder="특수기호 !@#$ 중 1개이상" > <br>
        이메일 : <input type="text" id="uiEmail" placeholder="메일전송이 가능한 주소" > <br>
        휴대번호: <input type="text" id="uiMobile" placeholder="' - ' 없이 입력" > <br />
-       생일 : <input type="text" id="uiBirth" placeholder="ex)1997-04-20" /> 
+       생일 : <input type="text" id="uiBirth" placeholder="ex)19970420" /> 
         <button id="uiBirthButton">달력</button> <br />
 
        <button onclick="insertUser()">회원 등록</button>
@@ -30,7 +30,7 @@
 
       birthButton.addEventListener('click', function() {
         calendar = flatpickr("#uiBirth", {
-          dateFormat: "Y-m-d",
+          dateFormat: "Ymd",
           inline: true,
           onClose: function(selectedDates, dateStr, instance) {
             birthInput.value = dateStr;

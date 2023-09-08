@@ -23,7 +23,7 @@
     </table>
     <script>
         window.addEventListener('load', async function(){
-            const res = await fetch('tmpl/user-infos');
+            const res = await fetch('/user-infos');
             const users = await res.json();
             let html = '';
             for(const user of users){

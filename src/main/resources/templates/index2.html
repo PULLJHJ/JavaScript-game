@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Team 5 테트리스</title>
-  <link rel="stylesheet" href="/resources/bg.css" />
+  <link rel="stylesheet" th:href="@{/css/bg.css}" />
 </head>
 
 <body>
@@ -69,16 +69,16 @@
 
   <div style="display: none;">
     <!-- bgm은 b버튼으로 재생 -->
-    <audio src="/resources/Tetris 99  Main Theme.mp3" id="bgm" loop></audio>
-    <audio src="/resources/clear_line.mp3" id="clear_line"></audio>
-    <audio src="/resources/drop.mp3" id="drop"></audio>
-    <audio src="/resources/game_over.mp3" id="game_over"></audio>
+    <audio th:src="@{/bgm/Tetris 99  Main Theme.mp3}" id="bgm" loop></audio>
+    <audio th:src="@{/soundEffect/clear_line.mp3}" id="clear_line"></audio>
+    <audio th:src="@{/soundEffect/drop.mp3}" id="drop"></audio>
+    <audio th:src="@{/soundEffect/game_over.mp3}" id="game_over"></audio>
   </div>
-  <script src="/resources/audio.js"></script>
-  <script src="/resources/function.js"></script>
-  <script src="/resources/block.js"></script>
-  <script src="/resources/canvas.js"></script>
-  <script src="/resources/main.js"></script>
+  <script th:src="@{/js/audio.js}"></script>
+  <script th:src="@{/js/function.js}"></script>
+  <script th:src="@{/js/block.js}"></script>
+  <script th:src="@{/js/canvas.js}"></script>
+  <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>

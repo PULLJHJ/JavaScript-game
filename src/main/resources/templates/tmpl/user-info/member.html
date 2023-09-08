@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table border="1">
+        <tr>
+            <th>아이디</th>
+            <th>비밀번호</th>
+            <th>이름</th>
+            <th>전화번호</th>
+            <th>이메일</th>
+            <th>생년월일</th>
+            <th>날짜생성</th>
+            <th>날짜수정</th>
+        </tr>
+        <tbody id="userBody">
+
+        </tbody>
+    </table>
+    <script>
+        window.addEventListener('load', async function () {
+            const url = new URL(location.href);
+            const params = url.searchParams;
+            const uiNum = params.get('uiNum');
+
+
+            const res = await fetch(`user-infos/${uiNum}`)
+            const users = await res.json();
+            
+            let html = '';
+            for (const user of users) {
+                html += '<th>';
+                html += `<td>${user.uiNum}</td>`;
+                html += `<td>${user.uiId}</td>`;
+                html += `<td>${user.uiPwd}</td>`;
+                html += `<td>${user.uiEmail}</td>`;
+                html += `<td>${user.uiBirth}</td>`;
+                html += `<td>${user.credat}</td>`;
+                html += `<td>${user.lmodat}</td>`;
+                html += '</th>';
+            }
+            document.querySelector('#userBody').innerHTML = html;
+        })
+
+    </script>
+</body>
+
+
+
+</html>

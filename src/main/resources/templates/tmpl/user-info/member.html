@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <button onclick="location.href='update.html'">수정</button>
+    <button onclick="goUpdatePage()">수정</button>
     <table border="1">
         <tr>
             <td>#</td>
@@ -31,7 +31,11 @@
         const url = new URL(location.href);
         const params = url.searchParams;
         const uiNum = params.get('uiNum');
-        
+
+        function goUpdatePage() {
+            location.href=`/tmpl/user-info/update?uiNum=${uiNum}`;
+        }
+
         async function deleteUserInfo() {
             const res = await fetch(`/user-infos/${uiNum}`, {
                 method: 'DELETE'

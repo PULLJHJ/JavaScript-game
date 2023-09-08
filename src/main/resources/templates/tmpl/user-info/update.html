@@ -17,9 +17,13 @@
         const url = new URL(location.href);
         const params = url.searchParams;
         const uiNum = params.get('uiNum');
+        console.log(uiNum);
+
+        
 
         async function updateUserInfo() {
             const data = {
+                uiNum  : uiNum,
                 uiName: document.querySelector('#uiName').value,
                 uiPwd: document.querySelector('#uiPwd').value,
                 uiMobile: document.querySelector('#uiMobile').value,

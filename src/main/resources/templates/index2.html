@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Team 5 테트리스</title>
+
   <link rel="stylesheet" th:href="@{/css/bg.css}" />
 </head>
 
@@ -69,10 +70,12 @@
 
   <div style="display: none;">
     <!-- bgm은 b버튼으로 재생 -->
+
     <audio th:src="@{/bgm/Tetris 99  Main Theme.mp3}" id="bgm" loop></audio>
     <audio th:src="@{/soundEffect/clear_line.mp3}" id="clear_line"></audio>
     <audio th:src="@{/soundEffect/drop.mp3}" id="drop"></audio>
     <audio th:src="@{/soundEffect/game_over.mp3}" id="game_over"></audio>
+
   </div>
   <script th:src="@{/js/audio.js}"></script>
   <script th:src="@{/js/function.js}"></script>

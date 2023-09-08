@@ -29,7 +29,7 @@
         const json = JSON.stringify(data);
         console.log(json);
 
-        const res = await fetch("http://localhost/user-infos", {
+        const res = await fetch("/user-infos", {
           method: "POST",
           headers: {
             "Content-Type": "application/json;charset=UTF-8",
@@ -40,7 +40,7 @@
         const result = await res.text();
         if (result == 1) {
           alert("등록되었습니다");
-          location.href = "/tmpl/user-info";
+          location.href = "/tmpl/user-info/list";
         } else {
           alert("등록에 실패했습니다.");
         }

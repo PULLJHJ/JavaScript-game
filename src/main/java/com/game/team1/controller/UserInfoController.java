@@ -46,4 +46,9 @@ public class UserInfoController {
         }
         return msg;
     }
+
+    @PostMapping("/user-infos")
+    public int insertUserInfo(@RequestBody UserInfoVO user){
+        return userService.insertUserInfo(user);
+    }
 }

@@ -5,9 +5,11 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -50,5 +52,15 @@ public class UserInfoController {
     @PostMapping("/user-infos")
     public int insertUserInfo(@RequestBody UserInfoVO user){
         return userService.insertUserInfo(user);
+    }
+
+    @PutMapping("/user-infos")
+    public int updateUserInfo(@RequestBody UserInfoVO user) {
+        return userService.updateUserInfo(user);
+    }
+
+    @DeleteMapping("/user-infos/{uiNum}")
+    public int deleteUserInfo(@PathVariable int uiNum) {
+        return userService.deleteUserInfo(uiNum);
     }
 }

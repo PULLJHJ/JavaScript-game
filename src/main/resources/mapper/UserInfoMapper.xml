@@ -9,7 +9,7 @@
 				AND UI_NUM = #{uiNum}
 			</if>
 			<if test='uiId != null and uiId != ""'>
-				AND UI_ID = #{uiId}
+				AND UI_ID LIKE CONCAT('%', #{uiId}, '%')
 			</if>
 			<if test='uiName != null and uiName != ""'>
 				AND UI_NAME LIKE CONCAT('%',#{uiName},'%')

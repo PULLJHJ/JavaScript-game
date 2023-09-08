@@ -23,12 +23,15 @@ public class UserInfoService {
     public UserInfoVO login(UserInfoVO user){
         return userMapper.selectUserInfoByIdAndPwd(user);
     }
+
 	public int insertUserInfo( UserInfoVO user) {
 		return userMapper.insertUserInfo(user);
 	}
+
 	public int updateUserInfo( UserInfoVO user) {
 		return userMapper.updateUserInfo(user);
 	}
+	
 	public int deleteUserInfo( int uiNum) {
 		return userMapper.deleteUserInfo(uiNum);
 	}

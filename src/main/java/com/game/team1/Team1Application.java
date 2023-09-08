@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @MapperScan
-@ComponentScan
+@ComponentScan 
 public class Team1Application {
 
 	public static void main(String[] args) {

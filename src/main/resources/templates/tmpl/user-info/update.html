@@ -18,8 +18,20 @@
         const params = url.searchParams;
         const uiNum = params.get('uiNum');
 
+        window.addEventListener('load', async function(){
+            const res = await fetch(`/user-infos/${uiNum}`);
+            const user = await res.json();
+            console.log(user);
+            for(let key in user){
+                if(document.querySelector('#'+key)){
+                    document.querySelector('#'+key).value = user[key];
+                }
+            }
+        });
+
         async function updateUserInfo() {
             const data = {
+                uiNum : uiNum,
                 uiName: document.querySelector('#uiName').value,
                 uiPwd: document.querySelector('#uiPwd').value,
                 uiMobile: document.querySelector('#uiMobile').value,

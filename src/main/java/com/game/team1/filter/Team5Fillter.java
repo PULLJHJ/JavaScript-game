@@ -35,11 +35,12 @@ public class Team5Fillter extends GenericFilterBean {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         if (request instanceof HttpServletRequest req && response instanceof HttpServletResponse res) {
-            HttpSession session = req.getSession();
+        	HttpSession session = req.getSession();
             UserInfoVO user = (UserInfoVO) session.getAttribute("user");
             log.info("user=>{}", user);
-            String uri = req.getRequestURI();
-            if (!execludeUrls.contains(uri)) {
+            String uri = req.getRequestURI();  //사용자가 입력한 uri 에서
+            log.info("uri=>{}",uri);
+            if (!execludeUrls.contains(uri)) { // 내가 설정한 Url가 없으면! 있으면 그냥 필터실행
                 if (user == null) {
                     res.sendRedirect("/");
                     return;
@@ -51,3 +52,4 @@ public class Team5Fillter extends GenericFilterBean {
 
     }
 }
+

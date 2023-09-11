@@ -6,17 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- @{}은 컨텍스트 루트 -->
-  <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
 </head>
 <!--여기서 아이디랑 이메일은 유니크여서 뺏어요!-->
 
 <body>
-    이름 : <input type="text" id="uiName" placeholder="이름"> <br>
-    비밀번호 : <input type="password" id="uiPwd" placeholder="특수기호 !@#$ 중 1개이상"> <br>
-    휴대번호: <input type="text" id="uiMobile" placeholder="' - ' 없이 입력"> <br>
-    생일 : <input type="text" id="uiBirth" placeholder="ex)19970420"> <br>
-
-    <button onclick="updateUserInfo()">업데이트</button>
+    <div class="container" id="container">
+        <form>
+            <b>이름</b> <input type="text" id="uiName" placeholder="이름"> <br>
+            <b>비밀번호</b> <input type="password" id="uiPwd" placeholder="특수기호 !@#$ 중 1개이상"> <br>
+            <b>휴대번호</b> <input type="text" id="uiMobile" placeholder="' - ' 없이 입력"> <br>
+            <b>생일</b> <input type="text" id="uiBirth" placeholder="ex)19970420"> <br>
+            <button type="button" onclick="updateUserInfo()">업데이트</button>
+        </form>
+    </div>
     <script>
         const url = new URL(location.href);
         const params = url.searchParams;

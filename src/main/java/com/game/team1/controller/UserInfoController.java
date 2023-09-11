@@ -25,7 +25,7 @@ public class UserInfoController {
     @Autowired
     private UserInfoService userService;
     
-	@GetMapping("/user-infos")
+	@GetMapping("/user-infos/**")
 	public List<UserInfoVO> getUserInfos(UserInfoVO user){
 
 		return userService.getUserInfos(user);

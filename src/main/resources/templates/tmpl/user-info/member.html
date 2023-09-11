@@ -10,26 +10,29 @@
 </head>
 
 <body>
+    <div class="container">
+        <table class="rwd-table">
+            <tr>
+                <td>#</td>
+                <td>아이디</td>
+                <td>비밀번호</td>
+                <td>이름</td>
+                <td>전화번호</td>
+                <td>이메일</td>
+                <td>생년월일</td>
+                <td>생성날짜</td>
+                <td>수정날짜</td>
+            </tr>
+            <tbody id="userBody">
 
-    <table border="1">
-        <tr>
-            <td>#</td>
-            <td>아이디</td>
-            <td>비밀번호</td>
-            <td>이름</td>
-            <td>전화번호</td>
-            <td>이메일</td>
-            <td>생년월일</td>
-            <td>생성날짜</td>
-            <td>수정날짜</td>
-        </tr>
-        <tbody id="userBody">
+            </tbody>
 
-        </tbody>
-
-    </table>
-    <button onclick="location.href=`/tmpl/user-info/update?uiNum=${uiNum}`">유저 수정</button>
-    <button onclick="deleteUserInfo()">삭제</button>
+        </table>
+        <div id="sign">
+            <button onclick="location.href=`/tmpl/user-info/update?uiNum=${uiNum}`" class="btn2">유저 수정</button>
+            <button onclick="deleteUserInfo()" class="btn2">삭제</button>
+        </div>
+    </div>
     <script>
         const url = new URL(location.href);
         const params = url.searchParams;

@@ -8,22 +8,21 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
 import com.game.team1.vo.UserInfoVO;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Component
-// @WebFilter(urlPatterns = "/tmpl/user-info/list")
+
+@WebFilter(value = {"/", "/tmpl/user-info/*", "/index2"}) 
 @Slf4j
 public class Team5Fillter extends GenericFilterBean {
-
+    //내가 예외로 지정할 페이지만 리스트에 추가
     private List<String> execludeUrls = new ArrayList<>();
     {
         execludeUrls.add("/tmpl/user-info/join");

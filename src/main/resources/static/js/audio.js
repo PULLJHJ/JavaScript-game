@@ -18,5 +18,6 @@ const bgm = document.querySelector('#bgm');
 const clearLine = document.querySelector('#clear_line');
 const drop = document.querySelector('#drop');
 const gameOver = document.querySelector('#game_over');
+const swap = document.querySelector('#swap');
 
 

@@ -162,6 +162,7 @@ function main() {
                 initNextBlockCanvas(); // 블럭미리보여주는곳 검은색으로 칠함
                 initNextBlockCanvas2();// 블럭미리보여주는곳 검은색으로 칠함
                 initSaveBlockCanvas(); // 블럭미리보여주는곳 검은색으로 칠함
+                saveBlockIndex = 0; //저장된블럭삭제
                 blockIndex.length = 0; //블럭인덱스 내용물다삭제
             }
         }

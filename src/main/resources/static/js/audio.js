@@ -15,9 +15,12 @@ class AudioPlayer {
 }
 const player = new AudioPlayer();
 const bgm = document.querySelector('#bgm');
+const bgm2 = document.querySelector('#bgm2');
+const bgm3 = document.querySelector('#bgm3');
 const clearLine = document.querySelector('#clear_line');
 const drop = document.querySelector('#drop');
 const gameOver = document.querySelector('#game_over');
 const swap = document.querySelector('#swap');
+
 
 

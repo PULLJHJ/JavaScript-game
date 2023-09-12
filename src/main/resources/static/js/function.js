@@ -302,6 +302,8 @@ function handleKeyPress(event) {
             break;
         case 66: //b 버튼
             player._stop(bgm);
+            player._stop(bgm2);
+            player._stop(bgm3);
             break;
     }
 }
@@ -596,6 +598,7 @@ function getBlockScore() {
                     stacked_height = 0; //제일 높이쌓인위치 초기화 인터벌마다 체크해줘서 다시 숫자가 변할것임
                     score += 1000; // 점수올리기
                     scoreCheck(); // 점수체크하고 1만점이상이면 속도올림
+                    bgmChange();
                     console.log(speedUp);
                     player.play(clearLine); //효과음 재생
                     document.querySelector("#score").innerHTML = score;// 점수적어줌
@@ -634,7 +637,26 @@ function speedControll() {
 
 // 점수가 만점 오를때마다 speedUp 
 function scoreCheck(){
-    if(score >= 10000 && speedUp < 50){
-        speedUp = (score/10000)*10;
+    if(score >= 5000 && speedUp < 50){
+        let s = Math.floor(score/5000);
+        speedUp = s *10;
+    }
+}
+
+// 특정점수가 되면 음악을 바꿈
+function bgmChange(){
+    if((score%30000) == 10000){
+        player._stop(bgm);
+        player.play(bgm2);
+    }
+
+    if((score%30000) == 20000){
+        player._stop(bgm2);
+        player.play(bgm3);
+    }
+
+    if((score%30000) == 0){
+        player._stop(bgm3);
+        player.play(bgm);
     }
 }

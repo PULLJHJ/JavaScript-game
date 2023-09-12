@@ -634,7 +634,7 @@ function speedControll() {
 
 // 점수가 만점 오를때마다 speedUp 
 function scoreCheck(){
-    if(score >= 1000 && speedUp < 50){
+    if(score >= 10000 && speedUp < 50){
         speedUp = (score/10000)*10;
     }
 }

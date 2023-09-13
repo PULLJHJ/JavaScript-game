@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.team1.service.PointInfoService;
@@ -21,7 +22,7 @@ public class PointInfoController {
     }
 
     @PostMapping("/point-infos")
-    public int insertPointInfo(PointInfoVO pointInfo) {
+    public int insertPointInfo(@RequestBody PointInfoVO pointInfo) {
         return piServce.insertPointInfo(pointInfo);
     }
 }

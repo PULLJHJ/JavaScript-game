@@ -37,6 +37,7 @@ public class UserInfoController {
 	}
     @PostMapping("/login")
     public MsgVO login(@RequestBody UserInfoVO user, MsgVO msg, HttpSession session){
+        session.setMaxInactiveInterval(7200);
         log.info("user=>{}", user);
         UserInfoVO loginUser = userService.login(user);
         msg.setMsg("아이디나 비밀번호를 확인하세요");

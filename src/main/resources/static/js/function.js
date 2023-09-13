@@ -637,7 +637,7 @@ function speedControll() {
 
 // 점수가 만점 오를때마다 speedUp 
 function scoreCheck(){
-    if(score >= 5000 && speedUp <= 100){
+    if(score >= 5000 && speedUp <= 70){
         let s = Math.floor(score/5000);
         speedUp = s *10;
     }

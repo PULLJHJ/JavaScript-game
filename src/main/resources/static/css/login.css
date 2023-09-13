@@ -12,6 +12,7 @@
     font-family: 'Montserrat', sans-serif;
     height: 100vh;
     margin: -20px 0 50px;
+  
   }
   
   h1 {
@@ -41,19 +42,51 @@
     text-decoration: none;
     margin: 15px 0;
   }
-  
+
+ 
   button {
-    border-radius: 20px;
-    border: 1px solid #FF4B2B;
-    background-color: #FF4B2B;
+    position:relative;
+    border-radius: 50px;
+    margin-top: auto;
+    border: 1px solid #3c97bf;
+    background-color: #3c97bf;
     color: #FFFFFF;
     font-size: 12px;
     font-weight: bold;
-    padding: 12px 45px;
+    padding: 12px 30px;
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
   }
+
+#birthInput{
+  position: relative;
+  width: 100%;
+}
+
+
+  #birthInput button{
+    position:absolute;
+    border-radius: 20px;
+    width: 100px;
+    height: 40px;
+    top: 0;
+    bottom: 0;
+    right: 1px;
+    border: 1px solid #808080;
+    background-color: #808080;
+    letter-spacing: 1px;
+    margin: auto 0;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    
+  }
+
   
   button:active {
     transform: scale(0.95);
@@ -70,6 +103,7 @@
   
   form {
     background-color: #FFFFFF;
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -81,11 +115,13 @@
   
   input {
     background-color: #eee;
+    border-radius: 50px;
     border: none;
     padding: 12px 15px;
     margin: 8px 0;
     width: 100%;
   }
+
   
   .container {
     background-color: #fff;

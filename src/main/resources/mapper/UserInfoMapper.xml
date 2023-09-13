@@ -36,16 +36,16 @@
 		WHERE UI_ID=#{uiId}
 		AND UI_PWD=#{uiPwd}
 	</select>
-	<insert id="insertUserInfo">
+	<insert id="insertUserInfo" parameterType="com.game.team1.vo.UserInfoVO">
 		INSERT INTO USER_INFO(UI_ID, UI_PWD, UI_NAME, UI_MOBILE, UI_EMAIL, UI_BIRTH) 
 		VALUES(#{uiId}, #{uiPwd}, #{uiName}, #{uiMobile}, #{uiEmail}, #{uiBirth})
 	</insert>
-	<update id="updateUserInfo">
+	<update id="updateUserInfo" parameterType="com.game.team1.vo.UserInfoVO">
 		UPDATE USER_INFO 
 		SET UI_PWD=#{uiPwd}, UI_NAME=#{uiName}, UI_MOBILE=#{uiMobile}, UI_BIRTH=#{uiBirth}
 		WHERE UI_NUM=#{uiNum}
 	</update>
-	<delete id="deleteUserInfo">
+	<delete id="deleteUserInfo" parameterType="com.game.team1.vo.UserInfoVO">
 		DELETE FROM USER_INFO WHERE UI_NUM=#{uiNum};
 	</delete>
 	

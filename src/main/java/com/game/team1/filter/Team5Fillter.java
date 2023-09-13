@@ -19,7 +19,7 @@ import com.game.team1.vo.UserInfoVO;
 import lombok.extern.slf4j.Slf4j;
 
 
-@WebFilter(value = {"/", "/tmpl/user-info/*", "/index2"}) 
+@WebFilter(value = {"/", "/tmpl/user-info/*", "/index2", "/game-info", "/point-infos"}) 
 @Slf4j
 public class Team5Fillter extends GenericFilterBean {
     //내가 예외로 지정할 페이지만 리스트에 추가

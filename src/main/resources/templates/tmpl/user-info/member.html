@@ -10,20 +10,20 @@
 </head>
 
 <body>
-    <div class="container">
-        <table class="rwd-table">
-            <tr>
-                <td>#</td>
-                <td>아이디</td>
-                <td>비밀번호</td>
-                <td>이름</td>
-                <td>전화번호</td>
-                <td>이메일</td>
-                <td>생년월일</td>
-                <td>생성날짜</td>
-                <td>수정날짜</td>
-            </tr>
-            <tbody id="userBody">
+    <button onclick="goUpdatePage()">수정</button>
+    <table border="1">
+        <tr>
+            <td>#</td>
+            <td>아이디</td>
+            <td>비밀번호</td>
+            <td>이름</td>
+            <td>전화번호</td>
+            <td>이메일</td>
+            <td>생년월일</td>
+            <td>생성날짜</td>
+            <td>수정날짜</td>
+        </tr>
+        <tbody id="userBody">
 
             </tbody>
 
@@ -37,6 +37,11 @@
         const url = new URL(location.href);
         const params = url.searchParams;
         const uiNum = params.get('uiNum');
+
+        function goUpdatePage() {
+            location.href=`/tmpl/user-info/update?uiNum=${uiNum}`;
+        }
+
 
         async function deleteUserInfo() {
             const res = await fetch(`/user-infos/${uiNum}`, {

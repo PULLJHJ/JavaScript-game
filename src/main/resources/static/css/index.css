@@ -61,6 +61,7 @@ body {
     border: none;
     display: block;
     text-align: center;
+    border-radius: 50px;
     cursor: pointer;
     text-transform: uppercase;
     outline: none;

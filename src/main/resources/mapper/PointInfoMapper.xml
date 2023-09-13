@@ -4,11 +4,11 @@
 
 <select id="selectPointInfo" resultType="com.game.team1.vo.PointInfoVO">
 		SELECT PI_NUM, GI_NUM, UI_NUM, PI_POINT, CREDAT, LMODAT
-		FROM USER_INFO
+		FROM POINT_INFO
 	</select>
 
 <insert id="insertPointInfo">
-		INSERT INTO USER_INFO(PI_NUM, GI_NUM, UI_NUM, PI_POINT) 
+		INSERT INTO POINT_INFO(PI_NUM, GI_NUM, UI_NUM, PI_POINT) 
 		VALUES(#{piNum}, #{giNum}, #{uiNum}, #{piPoint})
 	</insert>
     </mapper>

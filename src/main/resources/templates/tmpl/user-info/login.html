@@ -16,6 +16,7 @@
 </head>
 
 <body>
+    <input type="hidden" id="userInfoSession" th:value="${session.user}">
     <div class="container" id="container">
         <form method="post" action="/login">
             <h1>Team 5 Login</h1>
@@ -28,6 +29,13 @@
         </form>
     </div>
     <script>
+        window.addEventListener('load', function() {
+            // console.log(!document.querySelector('#userInfoSession').value);
+            if(document.querySelector('#userInfoSession').value) {
+                location.href = '/';
+            }
+        })
+
         async function login() {
             const json = JSON.stringify({
                 uiId: document.querySelector('#uiId').value,

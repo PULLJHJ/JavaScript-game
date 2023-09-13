@@ -46,6 +46,7 @@
  
   button {
     position:relative;
+    cursor: pointer;
     border-radius: 50px;
     margin-top: 10px;
     border: 1px solid #3c97bf;
@@ -69,12 +70,14 @@
   #uiBirthinput button{
     display: block;
     position:absolute;
+    cursor: pointer;
     border-radius: 20px;
     width: 100px;
-    height: 40px;
+    height: 38px;
+    cursor: auto;
     top: 0;
     bottom: 0;
-    margin: 10px 1px;
+    margin: 8px 1px;
     right: 1px;
     border: 1px solid #808080;
     background-color: #808080;

@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
     <title>Document</title>
+    <!-- @{}은 컨텍스트 루트 -->
+    <link rel="stylesheet" th:href="@{/css/table.css}" />
 </head>
 
 <body>
@@ -23,10 +25,14 @@
         </tr>
         <tbody id="userBody">
 
-        </tbody>
+            </tbody>
 
-    </table>
-    <button onclick="deleteUserInfo()" id="btn-delete">삭제</button>
+        </table>
+        <div id="sign">
+            <button onclick="location.href=`/tmpl/user-info/update?uiNum=${uiNum}`" class="btn2">유저 수정</button>
+            <button onclick="deleteUserInfo()" class="btn2">삭제</button>
+        </div>
+    </div>
     <script>
         const url = new URL(location.href);
         const params = url.searchParams;
@@ -36,27 +42,28 @@
             location.href=`/tmpl/user-info/update?uiNum=${uiNum}`;
         }
 
+
         async function deleteUserInfo() {
             const res = await fetch(`/user-infos/${uiNum}`, {
                 method: 'DELETE'
             });
             const result = await res.json();
 
-            if(result === 1) {
+            if (result === 1) {
                 alert('삭제 완료');
-                location.href='/tmpl/user-info/list';
+                location.href = '/tmpl/user-info/list';
             } else {
                 alert('삭제 실패');
             }
         }
 
         window.addEventListener('load', async function () {
-            const res = await fetch(`/user-infos/${uiNum}`);            
+            const res = await fetch(`/user-infos/${uiNum}`);
             const user = await res.json();
 
             console.log(user);
             let html = '';
-            
+
             html += '<tr>';
             html += `<td>${user.uiNum}</td>`;
             html += `<td>${user.uiId}</td>`;
@@ -68,7 +75,7 @@
             html += `<td>${user.credat}</td>`;
             html += `<td>${user.lmodat}</td>`;
             html += '</tr>';
-        
+
             document.querySelector('#userBody').innerHTML = html;
         })
 

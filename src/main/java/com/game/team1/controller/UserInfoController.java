@@ -25,7 +25,7 @@ public class UserInfoController {
     @Autowired
     private UserInfoService userService;
     
-	@GetMapping("/user-infos")
+	@GetMapping("/user-infos/**")
 	public List<UserInfoVO> getUserInfos(UserInfoVO user){
 
 		return userService.getUserInfos(user);
@@ -55,7 +55,7 @@ public class UserInfoController {
     }
 
     @PutMapping("/user-infos/{uiNum}")
-    public int updateUserInfo(@RequestBody UserInfoVO user, @PathVariable int uiNum) {
+    public int updateUserInfo(@RequestBody UserInfoVO user) {
         return userService.updateUserInfo(user);
     }
 

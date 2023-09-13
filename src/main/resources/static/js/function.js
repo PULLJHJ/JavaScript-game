@@ -11,8 +11,9 @@ const startBtn = document.querySelector('#startBtn');
 let tetrisBoard = []; //내가 조종할 테트리스
 let stackedBoard = []; // 쌓인 테트리스 공간
 let nextBlockBoard = []; // 다음에 보여줄 블럭
+let nextBlockBoard2 = []; // 다다음에 보여줄 블럭
+let saveBlockBoard = []; // 저장한 블록
 let stacked_height = 0; // 쌓여있는 테트리스중 가장 높이쌓인위치
-let previoustMoveX = 0;
 function tetrisBoardArray() {
     // 세로 29칸, 가로 12칸 테트리스 배열
     for (let height = 0; height < 29; height++) {
@@ -34,11 +35,31 @@ function stackedBoardArray() {
 }
 
 function nextBlockBoardArray() {
-    // 세로 20칸, 가로 10칸 테트리스 배열
+    // 세로 20칸, 가로 6칸 테트리스 배열
     for (let height = 0; height < 20; height++) {
         nextBlockBoard[height] = [];
-        for (let width = 0; width < 10; width++) {
+        for (let width = 0; width < 6; width++) {
             nextBlockBoard[height][width] = false; // 아직 아무것도 쌓인게 없어서 false
+        }
+    }
+}
+
+function nextBlockBoardArray2() {
+    // 세로 20칸, 가로 6칸 테트리스 배열
+    for (let height = 0; height < 20; height++) {
+        nextBlockBoard2[height] = [];
+        for (let width = 0; width < 6; width++) {
+            nextBlockBoard2[height][width] = false; // 아직 아무것도 쌓인게 없어서 false
+        }
+    }
+}
+
+function saveBlockBoardArray() {
+    // 세로 20칸, 가로 6칸 테트리스 배열
+    for (let height = 0; height < 20; height++) {
+        saveBlockBoard[height] = [];
+        for (let width = 0; width < 10; width++) {
+            saveBlockBoard[height][width] = false; // 아직 아무것도 쌓인게 없어서 false
         }
     }
 }
@@ -47,6 +68,8 @@ function nextBlockBoardArray() {
 tetrisBoardArray();
 stackedBoardArray();
 nextBlockBoardArray();
+nextBlockBoardArray2();
+saveBlockBoardArray();
 
 // 방식(Math)
 function getRandomBlockIndex() {
@@ -156,7 +179,32 @@ function chooseNextBlockColor(num) {
             break;
     }
 }
-
+//1~7 숫자를 랜덤으로 생성된것에 따라 색깔을 골라서 리턴
+function chooseNextBlockColor2(num) {
+    switch (num) {
+        case 1:
+            nextBlockContext2.fillStyle = '#a2ddf3';
+            break;
+        case 2:
+            nextBlockContext2.fillStyle = '#f3a2ca';
+            break;
+        case 3:
+            nextBlockContext2.fillStyle = '#a2f3db';
+            break;
+        case 4:
+            nextBlockContext2.fillStyle = '#56a6ff';
+            break;
+        case 5:
+            nextBlockContext2.fillStyle = '#f3c8a2';
+            break;
+        case 6:
+            nextBlockContext2.fillStyle = '#eaa2f3';
+            break;
+        case 7:
+            nextBlockContext2.fillStyle = '#a2a6f3';
+            break;
+    }
+}
 //키이벤트
 function handleKeyPress(event) {
     switch (event.keyCode) {
@@ -204,26 +252,22 @@ function handleKeyPress(event) {
                         stackedBoard[h][w] = true;
                     }
                     getRandAndInitMoveY();
-                } else {
-                    move_y++; //내려갈때는 y가 늘어가야되므로 y++
                 }
+                for (let i = 0; i < block_h.length; i++) { //블럭개수가 4개이므로 4번반복하겠죠..?
+                    if (stackedBoard[block_h[i] + 2][block_w[i]]) { //블럭의 현재좌표 오른쪽에 쌓인블럭이 있다면?
+                        can_move = false; //움직이지 않는다.
+                    }
+                }
+                if (can_move) { //움직일수있으면 ? 움직인다 ..!
+                    move_y++; //오른쪽으로갈땐 ++
+                }
+                can_move = true; //키이벤트가 끝나면 원래대로 돌려요!
 
             }
             downKey.style.backgroundColor = '#f0f0f0';
             break;
         case 38: // Up arrow
-            // 위 방향키가 안 눌린 상태면 눌린 상태로 바꾸고, 눌린 상태면 slowDown() 실행해서 느려지게 함
-            if (!isUpKeyPressed) {
-                isUpKeyPressed = true;
-                // 0.2초마다 1칸씩 내려가게 함
-                let interval = setInterval(function () {
-                    if (isUpKeyPressed) {
-                        move_y--;
-                    } else {
-                        clearInterval(interval);
-                    }
-                }, 200); // 더 천천히 하거나 빠르게 할거면 이거 숫자 바꾸면 됨
-            }
+            upkeyCount = 100;
             upKey.style.backgroundColor = '#f0f0f0';
             break;
         case 90: // 'z' key
@@ -236,6 +280,16 @@ function handleKeyPress(event) {
             break;
         case 16: // Shift key
             // 블록 저장 기능 추가
+            if (saveBlockIndex == 0) { //처음엔 블럭이 아무것도 없어서
+                saveBlockIndex = blockIndex[0];
+                blockIndex.shift();
+            } else {
+                //swap 알고리즘 A = saveBlockIndex / B = tmpBlockIndex / C = blockIndex
+                tmpBlockIndex = saveBlockIndex; // A -> B 
+                saveBlockIndex = blockIndex[0]; // C -> A
+                blockIndex[0] = tmpBlockIndex; // B -> C
+            }
+            player.play(swap);
             break;
         case 32: // Space bar
             // 바로 떨어지게 하기 기능 추가
@@ -243,11 +297,13 @@ function handleKeyPress(event) {
             check_stacked();
             player.play(drop);
             if (!(move_y > heightBlockCount - (controll_y + 1 + stacked_height + 1))) { // 테트리스 전체 높이에서 블럭의 최대길이와 가장높이쌓인것을 빼서 그게 블럭의 위치보다 낮지 않으면 실행 move_y는 계속증가한다
-                move_y = heightBlockCount - (controll_y + 1 + stacked_height + 3); //+3은 위치조절해줄려고 했음 빼주는 숫자가 커질수록 블럭이 위로올라감
+                move_y = heightBlockCount - (controll_y + 1 + stacked_height + 2); //+3은 위치조절해줄려고 했음 빼주는 숫자가 커질수록 블럭이 위로올라감
             }
             break;
         case 66: //b 버튼
             player._stop(bgm);
+            player._stop(bgm2);
+            player._stop(bgm3);
             break;
     }
 }
@@ -264,6 +320,7 @@ function handleKeyUp(event) {
             downKey.style.backgroundColor = 'gray';
             break;
         case 38: // Up arrow
+            upkeyCount = 0;
             upKey.style.backgroundColor = 'gray';
             break;
         case 90: // 'z' key
@@ -317,6 +374,7 @@ function drawBlocks() {
         }
     }
 }
+//----------------------------------------------------------------------------------------------------------------------------------------
 //다음 블럭 보여주는것
 function initNextBlockCanvas() {
     // 배경 그리기
@@ -331,24 +389,31 @@ function initNextBlockCanvas() {
 //다음에 보여줄 블력 그리기
 function drawNextBlock() {
     chooseNextBlockColor(blockIndex[1]);
-    chooseColor()
+
     for (let h = 0; h < nextheightBlockCount; h++) {
         for (let w = 0; w < nextwidthBlockCount; w++) {
             if (nextBlockBoard[h][w]) {
-                nextBlockContext.fillRect(nextBoarderWidth * h + nextBlocksize * h, nextBoarderWidth * w + nextBlocksize * w, nextBlocksize, nextBlocksize);
+                if (blockIndex[1] == 1) {
+                    nextBlockContext.fillRect(nextBoarderWidth * h + nextBlocksize * h - 5, nextBoarderWidth * w + nextBlocksize * w - 10, nextBlocksize, nextBlocksize);
+                } else if (blockIndex[1] == 4) {
+                    nextBlockContext.fillRect(nextBoarderWidth * h + nextBlocksize * h - 8, nextBoarderWidth * w + nextBlocksize * w - 2, nextBlocksize, nextBlocksize);
+                } else {
+                    nextBlockContext.fillRect(nextBoarderWidth * h + nextBlocksize * h, nextBoarderWidth * w + nextBlocksize * w, nextBlocksize, nextBlocksize);
+                }
+
             }
         }
     }
 }
-//블력그리기
+//다음 블력그리기
 function drawNextBlockOne(x, y) {
     if (blockIndex[1] == 4) {
-        nextBlockBoard[x + 2][y + 3] = true; //ㅁ 모양일때 가운데로 안가가지고 이렇게했습니다
+        nextBlockBoard[x + 2][y + 2] = true; //ㅁ 모양일때 가운데로 안가가지고 이렇게했습니다
     } else {
-        nextBlockBoard[x + 1][y + 3] = true; // 그외는 다이렇게 무지성 하드코딩;;
+        nextBlockBoard[x + 1][y + 2] = true; // 그외는 다이렇게 무지성 하드코딩;;
     }
 }
-// 블럭보여주기
+//다음 블럭보여주기
 function showNextBlock() {
     for (let i = 0; i < chooseBlock(blockIndex[1]).length; i++) {
         let x = chooseBlock(blockIndex[1])[0][i][0]; // x 좌표
@@ -359,11 +424,144 @@ function showNextBlock() {
     nextBlockBoard.length = 0;
     nextBlockBoardArray();
 }
+//----------------------------------------------------------------------------------------------------------------------------------------
+//다다음 블럭 보여주는것
+function initNextBlockCanvas2() {
+    // 배경 그리기
+    nextBlockContext2.fillStyle = "black"; //캔버스 블럭 색깔 종류
+    for (let h = 0; h < nextheightBlockCount2; h++) {
+        //가로세로 블럭수만큼 캔버스에 블럭그려넣기
+        for (let w = 0; w < nextwidthBlockCount2; w++) {
+            nextBlockContext2.fillRect(0, 0, canvas.width, canvas.height);
+        }
+    }
+}
+//다다음에 보여줄 블력 그리기
+function drawNextBlock2() {
+    chooseNextBlockColor2(blockIndex[2]);
+
+    for (let h = 0; h < nextheightBlockCount2; h++) {
+        for (let w = 0; w < nextwidthBlockCount2; w++) {
+            if (nextBlockBoard2[h][w]) {
+                if (blockIndex[2] == 1) {
+                    nextBlockContext2.fillRect(nextBoarderWidth2 * h + nextBlocksize2 * h - 5, nextBoarderWidth2 * w + nextBlocksize2 * w - 10, nextBlocksize2, nextBlocksize2);
+                } else if (blockIndex[2] == 4) {
+                    nextBlockContext2.fillRect(nextBoarderWidth2 * h + nextBlocksize2 * h - 8, nextBoarderWidth2 * w + nextBlocksize2 * w - 3, nextBlocksize2, nextBlocksize2);
+                } else {
+                    nextBlockContext2.fillRect(nextBoarderWidth2 * h + nextBlocksize2 * h, nextBoarderWidth2 * w + nextBlocksize2 * w, nextBlocksize2, nextBlocksize2);
+                }
+
+            }
+        }
+    }
+}
+//다다음 블력그리기
+function drawNextBlockOne2(x, y) {
+    if (blockIndex[2] == 4) {
+        nextBlockBoard2[x + 2][y + 2] = true; //ㅁ 모양일때 가운데로 안가가지고 이렇게했습니다
+    } else {
+        nextBlockBoard2[x + 1][y + 2] = true; // 그외는 다이렇게 무지성 하드코딩;;
+    }
+}
+//다다음 블럭보여주기
+function showNextBlock2() {
+    for (let i = 0; i < chooseBlock(blockIndex[2]).length; i++) {
+        let x = chooseBlock(blockIndex[2])[0][i][0]; // x 좌표
+        let y = chooseBlock(blockIndex[2])[0][i][1]; // y 좌표
+        drawNextBlockOne2(x, y);
+    }
+    drawNextBlock2();
+    nextBlockBoard2.length = 0;
+    nextBlockBoardArray2();
+}
+//---------------------------------------------블럭 저장하는곳-------------------------------------------------
+
+//저장한 블럭 보여주는것
+function initSaveBlockCanvas() {
+    // 배경 그리기
+    saveBlockContext.fillStyle = "black"; //캔버스 블럭 색깔 종류
+    for (let h = 0; h < saveheightBlockCount; h++) {
+        //가로세로 블럭수만큼 캔버스에 블럭그려넣기
+        for (let w = 0; w < savewidthBlockCount; w++) {
+            saveBlockContext.fillRect(0, 0, canvas.width, canvas.height);
+        }
+    }
+}
+//저장한 보여줄 블력 그리기
+function drawSaveBlock() {
+    chooseSaveBlockColor(saveBlockIndex);
+
+    for (let h = 0; h < saveheightBlockCount; h++) {
+        for (let w = 0; w < savewidthBlockCount; w++) {
+            if (saveBlockBoard[h][w]) {
+                if (saveBlockIndex == 1) {
+                    saveBlockContext.fillRect(saveBoarderWidth * h + saveBlocksize * h + 20, saveBoarderWidth * w + saveBlocksize * w + 80, saveBlocksize, saveBlocksize);
+                } else if (saveBlockIndex == 4) {
+                    saveBlockContext.fillRect(saveBoarderWidth * h + saveBlocksize * h + 50, saveBoarderWidth * w + saveBlocksize * w + 80, saveBlocksize, saveBlocksize);
+                } else {
+                    saveBlockContext.fillRect(saveBoarderWidth * h + saveBlocksize * h + 35, saveBoarderWidth * w + saveBlocksize * w + 80, saveBlocksize, saveBlocksize);
+                }
+
+            }
+        }
+    }
+}
+//저장한 블력그리기
+function drawSaveBlockOne(x, y) {
+    if (saveBlockIndex == 4) {
+        saveBlockBoard[x][y] = true; //ㅁ 모양일때 가운데로 안가가지고 이렇게했습니다
+    } else {
+        saveBlockBoard[x][y] = true; // 그외는 다이렇게 무지성 하드코딩;;
+    }
+}
+//저장한 블럭보여주기
+function showSaveBlock() {
+    if (saveBlockIndex != 0) {
+        for (let i = 0; i < chooseBlock(blockIndex[1]).length; i++) {
+            let x = chooseBlock(saveBlockIndex)[0][i][0]; // x 좌표
+            let y = chooseBlock(saveBlockIndex)[0][i][1]; // y 좌표
+            drawSaveBlockOne(x, y);
+        }
+    }
+    drawSaveBlock();
+    saveBlockBoard.length = 0;
+    saveBlockBoardArray();
+}
+//블럭색깔
+function chooseSaveBlockColor(num) {
+    switch (num) {
+        case 0:
+            saveBlockContext.fillStyle = '#black';
+            break;
+        case 1:
+            saveBlockContext.fillStyle = '#a2ddf3';
+            break;
+        case 2:
+            saveBlockContext.fillStyle = '#f3a2ca';
+            break;
+        case 3:
+            saveBlockContext.fillStyle = '#a2f3db';
+            break;
+        case 4:
+            saveBlockContext.fillStyle = '#56a6ff';
+            break;
+        case 5:
+            saveBlockContext.fillStyle = '#f3c8a2';
+            break;
+        case 6:
+            saveBlockContext.fillStyle = '#eaa2f3';
+            break;
+        case 7:
+            saveBlockContext.fillStyle = '#a2a6f3';
+            break;
+    }
+}
+//-------------------------------------------------------------------------------------------------
 //블럭 인덱스 배열에 미리 넣어주면서 새로 나올블록도 나오게 해줌 
 function getRandAndInitMoveY() {
     // blockIndex.push(nextBlockGenerator.getNextBlock()); //랜덤수 생성해서 인덱스 배열에 넣기
-    if (blockIndex.length == 2) {
-        for (let i = 0; i < 5; i++) { //블럭 5개 중복되지않게 뽑아내기
+    if (blockIndex.length == 3) {
+        for (let i = 0; i < 4; i++) { //블럭 5개 중복되지않게 뽑아내기
             let blockIndexNum = nextBlockGenerator.getNextBlock();
             if (blockIndex.includes(blockIndexNum)) {
                 i--;
@@ -399,13 +597,15 @@ function getBlockScore() {
                     }
                     stacked_height = 0; //제일 높이쌓인위치 초기화 인터벌마다 체크해줘서 다시 숫자가 변할것임
                     score += 1000; // 점수올리기
+                    scoreCheck(); // 점수체크하고 1만점이상이면 속도올림
+                    bgmChange();
+                    console.log(speedUp);
                     player.play(clearLine); //효과음 재생
                     document.querySelector("#score").innerHTML = score;// 점수적어줌
 
                 }
             } else {
                 countTrue = 0;
-                continue;
             }
         }
     }
@@ -427,4 +627,37 @@ function check_stacked() {
 }
 
 
+// 속도조절용 함수
+function speedControll() {
+    if (speedCount > (90 + upkeyCount - speedUp)) {
+        move_y++; //블럭내림
+        speedCount = 0;
+    }
+}
 
+// 점수가 만점 오를때마다 speedUp 
+function scoreCheck(){
+    if(score >= 5000 && speedUp <= 100){
+        let s = Math.floor(score/5000);
+        speedUp = s *10;
+    }
+}
+
+// 특정점수가 되면 음악을 바꿈
+// 으 일단 걍 숫자로 대충써놨음
+function bgmChange(){
+    if((score%30000) == 10000){
+        player._stop(bgm);
+        player.play(bgm2);
+    }
+
+    if((score%30000) == 20000){
+        player._stop(bgm2);
+        player.play(bgm3);
+    }
+
+    if((score%30000) == 0){
+        player._stop(bgm3);
+        player.play(bgm);
+    }
+}

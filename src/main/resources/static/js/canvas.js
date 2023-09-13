@@ -1,13 +1,31 @@
 //--------------------------------------블럭미리보여주는곳 -----------------------------------------------
 const nextBlockCanvas = document.getElementById("block-container"); //블럭 미리보여줄것
 const nextBlockContext = nextBlockCanvas.getContext("2d"); // //캔버스 그리는거 타입
-const nextBoarderWidth = 1;
-const nextBlocksize = 16;
-const nextwidthBlockCount = 6;
-const nextheightBlockCount = 20;
-nextBlockCanvas.width = 100;
-//-------------------------------------------------------------------------------------------------------
+const nextBoarderWidth = 2;
+const nextBlocksize = 25;
+const nextwidthBlockCount = 5;
+const nextheightBlockCount = 15;
+nextBlockCanvas.width = 150;
+nextBlockCanvas.height = 150;
 
+const nextBlockCanvas2 = document.getElementById("block-container2"); //블럭 미리보여줄것 다다음
+const nextBlockContext2 = nextBlockCanvas2.getContext("2d"); // //캔버스 그리는거 타입
+const nextBoarderWidth2 = 2;
+const nextBlocksize2 = 25;
+const nextwidthBlockCount2 = 5;
+const nextheightBlockCount2 = 15;
+nextBlockCanvas2.width = 150;
+nextBlockCanvas2.height = 150;
+
+const saveBlockCanvas = document.getElementById("saveblock-container"); //블럭 미리보여줄것 다다음
+const saveBlockContext = saveBlockCanvas.getContext("2d"); // //캔버스 그리는거 타입
+const saveBoarderWidth = 2;
+const saveBlocksize = 25;
+const savewidthBlockCount = 5;
+const saveheightBlockCount = 15;
+saveBlockCanvas.width = 150;
+saveBlockCanvas.height = 250;
+//-------------------------------------------------------------------------------------------------------
 // -------------------------------------블럭떨어지는곳 --------------------------------------------------
 const canvas = document.getElementById("tetrisCanvas"); //캔버스 객체 자체
 const context = canvas.getContext("2d"); //캔버스 그리는거 타입
@@ -30,7 +48,13 @@ let blockLocationArray_y = []; //블럭의 y좌표 값들 저장하는배열
 let countTrue = 0; // 테트리스 한줄이 전부 채워졋는지 확인하는 변수
 let score = 0; //점수
 let stacked_number = 0; // 계산용 변수
-let block_w = [0,0,0,0]; // 현재 블럭좌표 w
-let block_h = [0,0,0,0]; // 현재 블럭좌표 h
+let block_w = [0, 0, 0, 0]; // 현재 블럭좌표 w
+let block_h = [0, 0, 0, 0]; // 현재 블럭좌표 h
 let can_move = true;
+let speedCount = 0;
+let upkeyCount = 0;
+
+let saveBlockIndex = 0; // 저장블럭
+let tmpBlockIndex = 0; //임시블럭
+let speedUp = 0;
 //테스트용------------------------------------------------이거 한눈에볼라고 일단 여기다 적어놨어요 나중에 정리할게요

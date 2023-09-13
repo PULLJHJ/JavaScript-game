@@ -282,6 +282,7 @@ function handleKeyPress(event) {
             // 블록 저장 기능 추가
             if (saveBlockIndex == 0) { //처음엔 블럭이 아무것도 없어서
                 saveBlockIndex = blockIndex[0];
+                blockIndex.push(nextBlockGenerator.getRandomBlockIndex());
                 blockIndex.shift();
             } else {
                 //swap 알고리즘 A = saveBlockIndex / B = tmpBlockIndex / C = blockIndex
@@ -637,7 +638,7 @@ function speedControll() {
 
 // 점수가 만점 오를때마다 speedUp 
 function scoreCheck(){
-    if(score >= 5000 && speedUp <= 100){
+    if(score >= 5000 && speedUp <= 70){
         let s = Math.floor(score/5000);
         speedUp = s *10;
     }

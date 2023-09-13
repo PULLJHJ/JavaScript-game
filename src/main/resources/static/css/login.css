@@ -75,8 +75,8 @@
     width: 100px;
     height: 38px;
     cursor: auto;
-    top: 0;
-    bottom: 0;
+    top: 20px;
+    bottom: auto;
     margin: 8px 1px;
     right: 1px;
     border: 1px solid #808080;
@@ -87,13 +87,15 @@
     
   }
 
+
+
  
   button:active {
     transform: scale(0.95);
   }
   
   button:focus {
-  position: static;
+  position:static;
   }
   
   button.ghost {

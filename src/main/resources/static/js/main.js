@@ -147,7 +147,7 @@ function main() {
     }, 1); //숫자 건들지마시오.
 
     //맨위의 블럭이 채워졌을경우 게임오버
-    function checkGameOverEvent() {
+    async function checkGameOverEvent() {
         for (let w = 0; w < widthBlockCount; w++) {
             if (stackedBoard[0][w]) {
                 initCanvas(); //배경덮어씀
@@ -166,6 +166,21 @@ function main() {
                 blockIndex.length = 0; //블럭인덱스 내용물다삭제
 
                 //--------------------------------여기 밑에다가 async 함수 만들어서 포인트 인포 테이블에 인서트 되게함------------------------
+                // console.log(document.querySelector('#uiNum').value);
+                // console.log(document.querySelector('#score').textContent);
+                const res = await fetch('/point-infos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=UTF-8'
+                    },
+                    body: JSON.stringify({
+                        giNum: 1,
+                        uiNum: document.querySelector('#uiNum').value,
+                        piPoint: document.querySelector('#score').textContent
+                    })
+                });
+                const score = await res.json();
+                console.log(score);
                 
             }
         }

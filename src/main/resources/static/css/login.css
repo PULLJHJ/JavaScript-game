@@ -47,7 +47,7 @@
   button {
     position:relative;
     border-radius: 50px;
-    margin-top: auto;
+    margin-top: auto 0;
     border: 1px solid #3c97bf;
     background-color: #3c97bf;
     color: #FFFFFF;
@@ -59,41 +59,38 @@
     transition: transform 80ms ease-in;
   }
 
-#birthInput{
+#uiBirthinput{
   position: relative;
   width: 100%;
+
 }
 
 
-  #birthInput button{
+  #uiBirthinput button{
+    display: block;
     position:absolute;
     border-radius: 20px;
     width: 100px;
     height: 40px;
     top: 0;
     bottom: 0;
+    margin: 10px 1px;
     right: 1px;
     border: 1px solid #808080;
     background-color: #808080;
     letter-spacing: 1px;
-    margin: auto 0;
-    color: #FFFFFF;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 30px;
-    letter-spacing: 1px;
     text-transform: uppercase;
-    transition: transform 80ms ease-in;
+    transition: transform 80ms ease-in
     
   }
 
-  
+ 
   button:active {
     transform: scale(0.95);
   }
   
   button:focus {
-    outline: none;
+  position: static;
   }
   
   button.ghost {

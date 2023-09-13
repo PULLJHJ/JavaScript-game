@@ -644,6 +644,7 @@ function scoreCheck(){
 }
 
 // 특정점수가 되면 음악을 바꿈
+// 으 일단 걍 숫자로 대충써놨음
 function bgmChange(){
     if((score%30000) == 10000){
         player._stop(bgm);

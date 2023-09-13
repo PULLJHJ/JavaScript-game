@@ -35,8 +35,10 @@
     </div>
     <!-- 스크립트 넣기 싫엇는데 간단한 로직이라 그냥 여따 넣엇습니다. -->
     <script>
+        let giNum;
+
         function gotoPage() {
-            location.href = '/index2'
+            location.href = `/index2?giNum=${giNum}`
         }
 
         function logout() {
@@ -44,16 +46,16 @@
         }
 
         window.addEventListener('load', async function(){
-            const res = await fetch('/game-info');
-            const game = await res.json();
-            console.log(game);
-            const spanText = document.querySelector('#gameName');
-            for(let key of game){
-                let str = key.giName + ' 하러 가기';
-                spanText.innerText = str;
-            }
             
-            
+                const res = await fetch('/game-info');
+                const game = await res.json();
+                console.log(game);
+                const spanText = document.querySelector('#gameName');
+                for(let key of game){
+                    let str = key.giName + ' 하러 가기';
+                    giNum = key.giNum;
+                    spanText.innerText = str;
+                }
         });
     </script>
 </body>

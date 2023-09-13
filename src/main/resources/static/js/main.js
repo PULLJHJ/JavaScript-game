@@ -168,7 +168,8 @@ function main() {
                 //--------------------------------여기 밑에다가 async 함수 만들어서 포인트 인포 테이블에 인서트 되게함------------------------
                 // console.log(document.querySelector('#uiNum').value);
                 // console.log(document.querySelector('#score').textContent);
-                if(parseInt(document.querySelector('#score').textContent) > 0) {
+                // console.log(score);
+                if(score > 0) {
                     const res = await fetch('/point-infos', {
                         method: 'POST',
                         headers: {
@@ -177,11 +178,11 @@ function main() {
                         body: JSON.stringify({
                             giNum: 1,
                             uiNum: document.querySelector('#uiNum').value,
-                            piPoint: document.querySelector('#score').textContent
+                            piPoint: score
                         })
                     });
-                    const score = await res.json();
-                    console.log(score);
+                    const scoreResult = await res.json();
+                    console.log(scoreResult);
                 }
             }
         }

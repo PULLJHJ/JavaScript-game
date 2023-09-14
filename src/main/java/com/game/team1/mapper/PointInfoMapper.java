@@ -7,4 +7,6 @@ import com.game.team1.vo.PointInfoVO;
 public interface PointInfoMapper {
     List<PointInfoVO> selectPointInfo();
     int insertPointInfo(PointInfoVO pointInfo);
+
+    PointInfoVO selectMaxPoint(PointInfoVO point);
 }

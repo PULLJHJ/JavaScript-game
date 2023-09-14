@@ -2,13 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.game.team1.mapper.PointInfoMapper">
 
-<select id="selectPointInfo" resultType="com.game.team1.vo.PointInfoVO">
+	<select id="selectPointInfo" resultType="com.game.team1.vo.PointInfoVO">
 		SELECT PI_NUM, GI_NUM, UI_NUM, PI_POINT, CREDAT, LMODAT
 		FROM POINT_INFO
 	</select>
 
-<insert id="insertPointInfo">
+	<insert id="insertPointInfo">
 		INSERT INTO POINT_INFO(PI_NUM, GI_NUM, UI_NUM, PI_POINT) 
 		VALUES(#{piNum}, #{giNum}, #{uiNum}, #{piPoint})
 	</insert>
+
+	<select id="selectMaxPoint" resultType="com.game.team1.vo.PointInfoVO">
+		SELECT GI_NUM, MAX(PI_POINT) PI_POINT FROM POINT_INFO
+		WHERE UI_NUM=#{uiNum}
+		AND GI_NUM=#{giNum}
+	</select>
     </mapper>

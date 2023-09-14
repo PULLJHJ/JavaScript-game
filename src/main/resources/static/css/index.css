@@ -150,3 +150,8 @@ h1.title:hover:after {
 #userName {
     font-size: 20px;
 }
+/* 포인트 */
+#point {
+    font-weight: bold;
+    font-size: 20px;
+}

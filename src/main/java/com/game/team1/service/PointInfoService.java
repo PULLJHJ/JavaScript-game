@@ -20,4 +20,8 @@ public class PointInfoService {
     public int insertPointInfo(PointInfoVO pointInfo) {
         return piMapper.insertPointInfo(pointInfo);
     }
+
+    public PointInfoVO selectMaxPoint(PointInfoVO point){
+        return piMapper.selectMaxPoint(point);
+    }
 }

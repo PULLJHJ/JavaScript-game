@@ -270,12 +270,12 @@ function handleKeyPress(event) {
             upkeyCount = 100;
             upKey.style.backgroundColor = '#f0f0f0';
             break;
-        case 90: // 'z' key
-            rotate--;
+        case 90: // 'z' [key 이거 어떤사람이 바꾼거야 -ㅅ-]
+            rotate++;
             zKey.style.backgroundColor = '#f0f0f0';
             break;
-        case 67: // 'c' key
-            rotate++;
+        case 67: // 'c' key [이거 어떤사람이 바꾼거야 -ㅅ-]
+            rotate--;
             cKey.style.backgroundColor = '#f0f0f0';
             break;
         case 16: // Shift key

@@ -9,4 +9,6 @@ public interface PointInfoMapper {
     int insertPointInfo(PointInfoVO pointInfo);
 
     PointInfoVO selectMaxPoint(PointInfoVO point);
+
+    List<PointInfoVO> selectRank(PointInfoVO point);
 }

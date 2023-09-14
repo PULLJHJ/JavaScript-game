@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1">
+       <tr>
+            <td>#</td>
+            <td>게임명</td>
+            <td>유저이름</td>
+            <td>점수</td>
+       </tr>
+       <tbody id="ranking">
+       </tbody>
+    </table>
+    <script>
+        window.addEventListener('load',async function(){
+            const res = await fetch('/point-infos/rank');
+            const ranks  = await res.json();
+            let html = ''
+            let i=1;
+            for(const rank of ranks){
+                html += `<tr>`;
+                html += `<td>${i}위</td>`;
+                html += `<td>${rank.giName}</td>`;
+                html += `<td>${rank.uiName}</td>`;
+                html += `<td>${rank.piPoint}</td>`;
+                html += `</tr>`;
+                i++;
+            }
+            document.querySelector('#ranking').innerHTML = html;
+        })
+    </script>
+</body>
+</html>

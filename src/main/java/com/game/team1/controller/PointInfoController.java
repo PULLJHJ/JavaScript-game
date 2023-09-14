@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.mariadb.jdbc.type.Point;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,5 +36,10 @@ public class PointInfoController {
         UserInfoVO user = (UserInfoVO) session.getAttribute("user");
         point.setUiNum(user.getUiNum());
         return piServce.selectMaxPoint(point);
+    }
+
+    @GetMapping("/point-infos/rank")
+    public List<PointInfoVO> rankPointInfo(PointInfoVO point){
+        return piServce.selectRank(point);
     }
 }

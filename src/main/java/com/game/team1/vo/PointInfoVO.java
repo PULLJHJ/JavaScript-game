@@ -10,4 +10,6 @@ public class PointInfoVO {
     private int piPoint;
     private String credat;
     private String lmodat;
+    private String uiName;
+    private String giName;
 }

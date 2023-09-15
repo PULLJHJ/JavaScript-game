@@ -271,11 +271,11 @@ function handleKeyPress(event) {
             upKey.style.backgroundColor = '#f0f0f0';
             break;
         case 90: // 'z' key 
-            rotate++;
+            rotate--;
             zKey.style.backgroundColor = '#f0f0f0';
             break;
         case 67: // 'c' key 
-            rotate--;
+            rotate++;
             cKey.style.backgroundColor = '#f0f0f0';
             break;
         case 16: // Shift key

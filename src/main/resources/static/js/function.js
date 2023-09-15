@@ -630,7 +630,7 @@ function check_stacked() {
 
 // 속도조절용 함수
 function speedControll() {
-    if (speedCount > (90 + upkeyCount - speedUp)) {
+    if (speedCount > (100 + upkeyCount - speedUp)) {
         move_y++; //블럭내림
         speedCount = 0;
     }

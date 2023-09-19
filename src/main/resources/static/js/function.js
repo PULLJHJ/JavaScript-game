@@ -4,6 +4,7 @@ const downKey = document.querySelector('#downKey');
 const leftKey = document.querySelector('#leftKey');
 const rightKey = document.querySelector('#rightKey');
 const spaceKey = document.querySelector('#spaceKey');
+const shiftKey = document.querySelector('#shiftKey');
 const cKey = document.querySelector('#cKey');
 const zKey = document.querySelector('#zKey');
 const startBtn = document.querySelector('#startBtn');
@@ -291,6 +292,7 @@ function handleKeyPress(event) {
                 blockIndex[0] = tmpBlockIndex; // B -> C
             }
             player.play(swap);
+            shiftKey.style.backgroundColor = '#f0f0f0';
             break;
         case 32: // Space bar
             // 바로 떨어지게 하기 기능 추가
@@ -332,6 +334,7 @@ function handleKeyUp(event) {
             break;
         case 16: // Shift key
             // 블록 저장 기능 추가
+            shiftKey.style.backgroundColor = 'gray';
             break;
         case 32: // Space bar
             spaceKey.style.backgroundColor = 'gray';

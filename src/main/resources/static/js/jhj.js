@@ -14,7 +14,7 @@ function drawBall() {
 }
 
 async function saveScore() {
-  if(score > 0) {
+  if(scoreTitle.textContent === 0) {
     const res = await fetch('/point-infos', {
       method: 'POST',
       headers: {
@@ -55,6 +55,8 @@ function drawMoveBall() {
       player.play(paddle_sound); //효과음재생
       // console.log('공 위치 = ' + x + ', ' + '패들위치 = ' + paddleXPosition);
       if(isEatStickItem) {
+        y = canvas.height - 130;
+        dy = 0;
         clearInterval(interval);
         interval = setInterval(function () {
           //지우고 그리고 반복하겠지.. 충돌함수도 고려..
@@ -65,10 +67,6 @@ function drawMoveBall() {
           drawBoard(); //벽돌그리기
       }, 1);
         ctx.clearRect(0, y, 1080, canvas.height - paddleHeight); //그린거 다시 그리기위해 전체 백지화
-        y = canvas.height - 130;
-        // console.log('공의 위치 = ' + x);
-        // console.log('패들의 중앙 위치 = ' + (paddleXPosition + paddleWidth / 2));
-        // console.log('공의 위치 - 패들의 중앙 위치 = ' + (x - (paddleXPosition + paddleWidth / 2)));
         betweenBallAndPaddle = x - dx - (paddleXPosition + paddleWidth / 2);
         drawBall();
         drawPaddle();

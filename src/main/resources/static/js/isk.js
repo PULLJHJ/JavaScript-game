@@ -61,8 +61,6 @@ function stickyPaddleItemTimeOut() {
 // 아이템 그리는 함수
 function animateItem(x, y, Url) { //이거 매개변수를 자꾸 Undifined 로 받아서 강제로 접목시킴ㅋㅋㅋㅋㅋㅋㅋ 찾아보니까 자바스크립트 특성이래요
   //이거 계산이 패들 세로길이 + 패들위치 이렇게하면되요
-  console.log(chooseImage);
-  console.log(Url);
   if (Url == 'img/item1.png') { //목숨증가 아이템
     chooseImage = item1;
   } else if (Url == 'img/item2.png') { //파워 아이템
@@ -72,7 +70,6 @@ function animateItem(x, y, Url) { //이거 매개변수를 자꾸 Undifined 로 
   } else if (Url == 'img/item4.png') { // 접착아이템
     chooseImage = item4;
   }
-  console.log(chooseImage);
   const paddleY = canvas.height - paddleHeight - 100;
   if (y <= canvas.height) {
     ctx.clearRect(x, y, chooseImage.width, chooseImage.height);

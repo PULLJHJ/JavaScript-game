@@ -20,8 +20,13 @@ public class TemplateController {
     }
 
     @GetMapping("/index2")
-    public String index(){
+    public String goTetris(){
         return "index2";
+    }
+
+    @GetMapping("/index3")
+    public String goBreakWall(){
+        return "index3";
     }
 
     @GetMapping("/logout")

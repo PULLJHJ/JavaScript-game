@@ -20,16 +20,16 @@
     </table>
     <script>
         window.addEventListener('load',async function(){
-            const res = await fetch('/point-infos/rank');
-            const ranks  = await res.json();
+            const res = await fetch('/point-infos/rank2');
+            const sequences  = await res.json();
             let html = ''
             let i=1;
-            for(const rank of ranks){
+            for(const sequence of sequences){
                 html += `<tr>`;
                 html += `<td>${i}위</td>`;
-                html += `<td>${rank.giName}</td>`;
-                html += `<td>${rank.uiName}</td>`;
-                html += `<td>${rank.piPoint}</td>`;
+                html += `<td>${sequence.giName}</td>`;
+                html += `<td>${sequence.uiName}</td>`;
+                html += `<td>${sequence.piPoint}</td>`;
                 html += `</tr>`;
                 i++;
             }

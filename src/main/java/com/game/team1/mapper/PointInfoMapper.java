@@ -11,4 +11,6 @@ public interface PointInfoMapper {
     PointInfoVO selectMaxPoint(PointInfoVO point);
 
     List<PointInfoVO> selectRank(PointInfoVO point);
+
+    List<PointInfoVO> selectRank2(PointInfoVO point);
 }

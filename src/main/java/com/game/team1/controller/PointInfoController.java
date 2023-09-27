@@ -40,4 +40,9 @@ public class PointInfoController {
     public List<PointInfoVO> rankPointInfo(PointInfoVO point){
         return piServce.selectRank(point);
     }
+    
+    @GetMapping("/point-infos/rank2")
+    public List<PointInfoVO> rankPointInfo2(PointInfoVO point){
+        return piServce.selectRank2(point);
+    }
 }

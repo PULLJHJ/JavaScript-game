@@ -28,4 +28,8 @@ public class PointInfoService {
     public List<PointInfoVO> selectRank(PointInfoVO point){
         return piMapper.selectRank(point);
     }
+
+    public List<PointInfoVO> selectRank2(PointInfoVO point){
+        return piMapper.selectRank2(point);
+    }
 }

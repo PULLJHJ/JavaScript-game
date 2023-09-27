@@ -15,8 +15,15 @@
 	<select id="selectMaxPoint" resultType="com.game.team1.vo.PointInfoVO">
 		SELECT GI_NUM, MAX(PI_POINT) PI_POINT FROM POINT_INFO
 		WHERE UI_NUM=#{uiNum}
-		AND GI_NUM=#{giNum}
+		AND GI_NUM=1
 	</select>
+
+	<select id="selectMaxPoint2" resultType="com.game.team1.vo.PointInfoVO">
+		SELECT GI_NUM, MAX(PI_POINT) PI_POINT FROM POINT_INFO
+		WHERE UI_NUM=#{uiNum}
+		AND GI_NUM=3
+	</select>
+	
 	<select id="selectRank" resultType="com.game.team1.vo.PointInfoVO">
 		SELECT PI.*, GI.GI_NAME, UI.UI_NAME FROM POINT_INFO PI
 		LEFT JOIN GAME_INFO GI ON PI.GI_NUM = GI.GI_NUM

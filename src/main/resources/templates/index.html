@@ -84,6 +84,14 @@
             let html = `<span id="point">최대점수는 ${point.piPoint}점 입니다 </span>`
             document.querySelector('#maxScore').innerHTML = html;
         })
+
+        window.addEventListener('load', async function(){
+            const res = await fetch('/point-infos/max2?giNum=3');
+            const point = await res.json();
+
+            let html = `<span id="point">최대점수는 ${point.piPoint}점 입니다 </span>`
+            document.querySelector('#maxScore2').innerHTML = html;
+        })
     </script>
 </body>
 

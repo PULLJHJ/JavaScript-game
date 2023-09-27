@@ -10,6 +10,8 @@ public interface PointInfoMapper {
     
     PointInfoVO selectMaxPoint(PointInfoVO point);
 
+    PointInfoVO selectMaxPoint2(PointInfoVO point);
+
     List<PointInfoVO> selectRank(PointInfoVO point);
 
     List<PointInfoVO> selectRank2(PointInfoVO point);

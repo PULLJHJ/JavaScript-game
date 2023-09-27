@@ -24,6 +24,9 @@ public class PointInfoService {
     public PointInfoVO selectMaxPoint(PointInfoVO point){
         return piMapper.selectMaxPoint(point);
     }
+    public PointInfoVO selectMaxPoint2(PointInfoVO point){
+        return piMapper.selectMaxPoint2(point);
+    }
 
     public List<PointInfoVO> selectRank(PointInfoVO point){
         return piMapper.selectRank(point);

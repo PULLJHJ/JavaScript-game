@@ -36,6 +36,13 @@ public class PointInfoController {
         return piServce.selectMaxPoint(point);
     }
 
+    @GetMapping("/point-infos/max2")
+    public PointInfoVO getMaxPointInfo2(PointInfoVO point, HttpSession session){
+        UserInfoVO user = (UserInfoVO) session.getAttribute("user");
+        point.setUiNum(user.getUiNum());
+        return piServce.selectMaxPoint2(point);
+    }
+
     @GetMapping("/point-infos/rank")
     public List<PointInfoVO> rankPointInfo(PointInfoVO point){
         return piServce.selectRank(point);

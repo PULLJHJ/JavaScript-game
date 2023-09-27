@@ -14,7 +14,7 @@ function drawBall() {
 }
 
 async function saveScore() {
-  if(scoreTitle.textContent === 0) {
+  if(scoreTitle.textContent > 0) {
     const res = await fetch('/point-infos', {
       method: 'POST',
       headers: {

@@ -20,8 +20,9 @@
     </table>
     <script>
         window.addEventListener('load',async function(){
-            const res = await fetch('/point-infos/rank');
+            const res = await fetch(`/point-infos/rank/${giNum}`);
             const ranks  = await res.json();
+            console.log(giNum);
             let html = ''
             let i=1;
             for(const rank of ranks){

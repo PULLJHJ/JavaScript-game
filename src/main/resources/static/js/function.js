@@ -4,6 +4,7 @@ const downKey = document.querySelector('#downKey');
 const leftKey = document.querySelector('#leftKey');
 const rightKey = document.querySelector('#rightKey');
 const spaceKey = document.querySelector('#spaceKey');
+const shiftKey = document.querySelector('#shiftKey');
 const cKey = document.querySelector('#cKey');
 const zKey = document.querySelector('#zKey');
 const startBtn = document.querySelector('#startBtn');
@@ -270,11 +271,11 @@ function handleKeyPress(event) {
             upkeyCount = 100;
             upKey.style.backgroundColor = '#f0f0f0';
             break;
-        case 90: // 'z' key
+        case 90: // 'z' key 
             rotate--;
             zKey.style.backgroundColor = '#f0f0f0';
             break;
-        case 67: // 'c' key
+        case 67: // 'c' key 
             rotate++;
             cKey.style.backgroundColor = '#f0f0f0';
             break;
@@ -291,6 +292,7 @@ function handleKeyPress(event) {
                 blockIndex[0] = tmpBlockIndex; // B -> C
             }
             player.play(swap);
+            shiftKey.style.backgroundColor = '#f0f0f0';
             break;
         case 32: // Space bar
             // 바로 떨어지게 하기 기능 추가
@@ -332,6 +334,7 @@ function handleKeyUp(event) {
             break;
         case 16: // Shift key
             // 블록 저장 기능 추가
+            shiftKey.style.backgroundColor = 'gray';
             break;
         case 32: // Space bar
             spaceKey.style.backgroundColor = 'gray';
@@ -630,7 +633,7 @@ function check_stacked() {
 
 // 속도조절용 함수
 function speedControll() {
-    if (speedCount > (90 + upkeyCount - speedUp)) {
+    if (speedCount > (100 + upkeyCount - speedUp)) {
         move_y++; //블럭내림
         speedCount = 0;
     }
@@ -647,17 +650,17 @@ function scoreCheck(){
 // 특정점수가 되면 음악을 바꿈
 // 으 일단 걍 숫자로 대충써놨음
 function bgmChange(){
-    if((score%30000) == 10000){
+    if((score%15000) == 5000){
         player._stop(bgm);
         player.play(bgm2);
     }
 
-    if((score%30000) == 20000){
+    if((score%15000) == 10000){
         player._stop(bgm2);
         player.play(bgm3);
     }
 
-    if((score%30000) == 0){
+    if((score%15000) == 0){
         player._stop(bgm3);
         player.play(bgm);
     }

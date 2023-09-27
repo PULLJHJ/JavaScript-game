@@ -1,5 +1,5 @@
 //--------------------------------------블럭미리보여주는곳 -----------------------------------------------
-const nextBlockCanvas = document.getElementById("block-container"); //블럭 미리보여줄것
+const nextBlockCanvas = document.querySelector("#block-container"); //블럭 미리보여줄것
 const nextBlockContext = nextBlockCanvas.getContext("2d"); // //캔버스 그리는거 타입
 const nextBoarderWidth = 2;
 const nextBlocksize = 25;
@@ -8,7 +8,7 @@ const nextheightBlockCount = 15;
 nextBlockCanvas.width = 150;
 nextBlockCanvas.height = 150;
 
-const nextBlockCanvas2 = document.getElementById("block-container2"); //블럭 미리보여줄것 다다음
+const nextBlockCanvas2 = document.querySelector("#block-container2"); //블럭 미리보여줄것 다다음
 const nextBlockContext2 = nextBlockCanvas2.getContext("2d"); // //캔버스 그리는거 타입
 const nextBoarderWidth2 = 2;
 const nextBlocksize2 = 25;
@@ -17,7 +17,7 @@ const nextheightBlockCount2 = 15;
 nextBlockCanvas2.width = 150;
 nextBlockCanvas2.height = 150;
 
-const saveBlockCanvas = document.getElementById("saveblock-container"); //블럭 미리보여줄것 다다음
+const saveBlockCanvas = document.querySelector("#saveblock-container"); //블럭 미리보여줄것 다다음
 const saveBlockContext = saveBlockCanvas.getContext("2d"); // //캔버스 그리는거 타입
 const saveBoarderWidth = 2;
 const saveBlocksize = 25;
@@ -27,7 +27,7 @@ saveBlockCanvas.width = 150;
 saveBlockCanvas.height = 250;
 //-------------------------------------------------------------------------------------------------------
 // -------------------------------------블럭떨어지는곳 --------------------------------------------------
-const canvas = document.getElementById("tetrisCanvas"); //캔버스 객체 자체
+const canvas = document.querySelector("#tetrisCanvas"); //캔버스 객체 자체
 const context = canvas.getContext("2d"); //캔버스 그리는거 타입
 const borderWidth = 1; //테트리스 블럭마다 띄우는정도
 const blocksize = 15; //블럭사이즈

@@ -35,6 +35,15 @@ longPaddleImage.src = "../img/long_paddle.png";
 const stickyPaddleImage = new Image();
 stickyPaddleImage.src = "../img/sticky_paddle.png";
 
+const item1 = new Image();
+item1.src = "../img/item1.png";
+const item2 = new Image();
+item2.src = "../img/item2.png";
+const item3 = new Image();
+item3.src = "../img/item3.png";
+const item4 = new Image();
+item4.src = "../img/item4.png";
+
 // 코드 마음대로 바꿔서 죄송합니다. 아이템 버그 고치는데 이 방법밖에 생각이 안나서.. 원래 배열에 들어갔던 숫자가 blockNum이고 다른건 신경 안 쓰셔도 됩니다. -류승호-
 //----------------------------------------------------------------
 //  1단계

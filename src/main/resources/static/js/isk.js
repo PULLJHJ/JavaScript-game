@@ -7,18 +7,25 @@ let scoreTitle = document.querySelector("#score"); // 스코어 html
 const Board = []; //배열 초기화
 let stage = 1; //스테이지 번호
 let remains = 0; // 남아있는 블럭 체크용 변수
+let chooseImage = new Image(); // 이미지 객채 생성
+
+//이미지 로딩을위한 한번대입
+chooseImage = item1;
+chooseImage = item2;
+chooseImage = item3;
+chooseImage = item4;
 const imageUrls = [
-  "http://localhost/img/item1.png",
-  "http://localhost/img/item2.png",
-  "http://localhost/img/item3.png",
-  "http://localhost/img/item4.png"
+  "img/item1.png",
+  "img/item2.png",
+  "img/item3.png",
+  "img/item4.png"
 ];
 let randomImageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)];
 let longPaddleItemTimeOutId;
 let PowerballItemTimeOutId;
 let stickyPaddleItemTimeOutId;
 
-const chooseImage = new Image(); // 이미지 객채 생성
+
 let isEatStickItem = false; // 접착 아이템 먹었는지
 
 //---------------------------------------변수 선언은 위에다 하는게좋아요.. 그때그때 생성해버리면 보기 어지러워요..-----------------------------
@@ -54,13 +61,23 @@ function stickyPaddleItemTimeOut() {
 // 아이템 그리는 함수
 function animateItem(x, y, Url) { //이거 매개변수를 자꾸 Undifined 로 받아서 강제로 접목시킴ㅋㅋㅋㅋㅋㅋㅋ 찾아보니까 자바스크립트 특성이래요
   //이거 계산이 패들 세로길이 + 패들위치 이렇게하면되요
+  
+  if (Url == 'img/item1.png') { //목숨증가 아이템
+    chooseImage = item1;
+  } else if (Url == '/img/item2.png') { //파워 아이템
+    chooseImage = item2;
+  } else if (Url == '/img/item3.png') { //패들길어지는 아이템
+    chooseImage = item3;
+  } else if (Url == 'img/item4.png') { // 접착아이템
+    chooseImage = item4;
+  }
   const paddleY = canvas.height - paddleHeight - 100;
   if (y <= canvas.height) {
     ctx.clearRect(x, y, chooseImage.width, chooseImage.height);
   }
   // 캔버스 높이에서 떨어지면
   y += 5; //이미지 내려가는 속도 조절할 수 있음
-  chooseImage.src = Url;
+  
   ctx.drawImage(chooseImage, x + (block_width / 2), y);//이미지 그리는 위치
   if (
     x < paddleXPosition + paddleWidth && //?
@@ -233,6 +250,7 @@ function drawBoard() {
           }
           if (Board[i][j].blockNum === 4) {
             Board[i][j].blockNum = 0; // 
+
             animateItem(brickX, brickY, Board[i][j].randomImageUrl);
           }
           if (Board[i][j].blockNum === 5) {

@@ -13,6 +13,26 @@ function drawBall() {
 
 }
 
+async function saveScore() {
+  if(score > 0) {
+    const res = await fetch('/point-infos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8'
+      },
+      body: JSON.stringify({
+        giNum: 3,
+        uiNum: document.querySelector('#uiNum').value,
+        piPoint: parseInt(scoreTitle.textContent)
+      })
+    });
+    const scoreResult = await res.json();
+    console.log(scoreResult);
+  } else {
+    alert('0점은 기록에 저장되지 않음!');
+  }
+}
+
 function drawMoveBall() {
   // x,y좌표를 통해 공그림
 
@@ -99,6 +119,7 @@ function drawMoveBall() {
     document.querySelector('#lives').innerHTML = life_html; //목숨개수를 새로쓴다.
 
     if (life === 0) { //목숨이 없어지면?
+      saveScore();
       alert("게임 종료") //ㅋㅋ
       clearInterval(interval);  // 이거 없으면 공 위치가 초기화가 안되서 31번줄 if문에 계속 걸려서 경고창 뜨는것 같아서 넣었음.
       document.location.reload();

@@ -199,14 +199,7 @@ function drawBoard() {
             y <= brickY + block_height
           ) {
             // 충돌 발생 시 블록을 없애고 값 0으로 변경 블록 사라짐
-            // Board[i][j].blockNum -= 1;
-            for (let i = 0; i < Board.length; i++) {
-              for (let j = 0; j < Board[i].length; j++) {
-                if(Board[i].length > 0 && Board[i][j]) {
-                  Board[i][j].blockNum = 0;
-                }
-              }
-            }
+            Board[i][j].blockNum -= 1;
             player.play(attack_block);
             // 보드의 남아있는 블럭을 체크 없으면 다음스테이지
             checkBoard();

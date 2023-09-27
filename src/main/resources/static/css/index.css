@@ -3,7 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
+    margin:auto;    
     background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%);
     background-repeat: no-repeat;
     background-size: cover;
@@ -53,7 +53,7 @@ body {
     font-size: 15px;
     background-color: #222;
     padding: 17px 60px;
-    margin: 0 auto;
+    
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.20);
 }
 
@@ -154,4 +154,9 @@ h1.title:hover:after {
 #point {
     font-weight: bold;
     font-size: 20px;
+}
+
+#game1{
+    display: flex;
+    justify-content: center;
 }

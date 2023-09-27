@@ -28,10 +28,14 @@
         <!-- 로그인 한 유저가 있으면 -->
         <div th:if="${session.user} != null">
             <div class="introduce"> <span id="userName" th:text="${session.user.uiName}"></span>님 안녕하세요.</div> <br>
-            <ul></ul>
-            <div id="maxScore"></div>
-            <!-- 마우스 커서 올리면 애니메이션 나오는 버튼 -->
-            <button class="btn" onclick="gotoPage()"><span id="gameName">게임 하러 가기</span></button>
+            <div id="maxScore"></div><br>
+
+            <div id="game1">
+                <button class="btn" onclick="location.href='/tmpl/user-info/rank'"><span>점수 보러가기</span></button>
+                <ul></ul>
+                <!-- 마우스 커서 올리면 애니메이션 나오는 버튼 -->
+                <button class="btn" onclick="gotoPage()"><span id="gameName">게임 하러 가기</span></button>
+            </div>
         </div>
     </div>
     <!-- 스크립트 넣기 싫엇는데 간단한 로직이라 그냥 여따 넣엇습니다. -->
@@ -46,20 +50,20 @@
             location.href = '/logout'
         }
 
-        window.addEventListener('load', async function(){
-            
-                const res = await fetch('/game-info');
-                const game = await res.json();
-                console.log(game);
-                const spanText = document.querySelector('#gameName');
-                for(let key of game){
-                    let str = key.giName + ' 하러 가기';
-                    giNum = key.giNum;
-                    spanText.innerText = str;
-                }
+        window.addEventListener('load', async function () {
+
+            const res = await fetch('/game-info');
+            const game = await res.json();
+            console.log(game);
+            const spanText = document.querySelector('#gameName');
+            for (let key of game) {
+                let str = key.giName + ' 하러 가기';
+                giNum = key.giNum;
+                spanText.innerText = str;
+            }
         });
 
-        window.addEventListener('load', async function(){
+        window.addEventListener('load', async function () {
             const res = await fetch('/point-infos/max?giNum=1');
             const point = await res.json();
 

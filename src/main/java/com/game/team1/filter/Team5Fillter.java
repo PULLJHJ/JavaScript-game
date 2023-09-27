@@ -28,8 +28,8 @@ public class Team5Fillter extends GenericFilterBean {
         execludeUrls.add("/tmpl/user-info/join");
         execludeUrls.add("/tmpl/user-info/login");
         execludeUrls.add("/");
-        execludeUrls.add("/login"); // 로그인 버튼 눌러서 로그인 요청할때 필터 안되게하려고
-        execludeUrls.add("/user-infos");    //회원가입 버튼 눌러서 회원가입 요청 할때 필터 안되게하려고
+        execludeUrls.add("/login");
+        execludeUrls.add("/user-infos");  
     }
 
     @Override
